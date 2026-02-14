@@ -5,6 +5,9 @@ import Home from "./pages/Home";
 import { getTheme } from "./theme";
 import "./App.css";
 
+const HOME_SECTION_IDS = ["latest-projects", "skill-toolkit", "professional-experience", "education"];
+const NO_SECTION_IDS = [];
+
 function Layout({ darkMode, setDarkMode }) {
   const theme = getTheme(darkMode);
   const { pathname } = useLocation();
@@ -15,14 +18,11 @@ function Layout({ darkMode, setDarkMode }) {
     setActiveSection("");
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   };
-  const sectionIds = isHomePage
-    ? ["latest-projects", "skill-toolkit", "professional-experience", "education"]
-    : [];
+  const sectionIds = isHomePage ? HOME_SECTION_IDS : NO_SECTION_IDS;
   const showSidebarActions = sectionIds.includes(activeSection);
 
   useEffect(() => {
-    if (sectionIds.length === 0) {
-      setActiveSection("");
+    if (!isHomePage) {
       return;
     }
 
@@ -48,11 +48,7 @@ function Layout({ darkMode, setDarkMode }) {
       window.removeEventListener("scroll", updateActiveSection);
       window.removeEventListener("hashchange", updateActiveSection);
     };
-  }, [pathname]);
-
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
+  }, [isHomePage, sectionIds]);
 
   useEffect(() => {
     document.body.classList.toggle("mobile-menu-open", mobileMenuOpen);
@@ -320,6 +316,11 @@ function Layout({ darkMode, setDarkMode }) {
   );
 }
 
+function RoutedLayout(props) {
+  const { pathname } = useLocation();
+  return <Layout key={pathname} {...props} />;
+}
+
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   
@@ -329,7 +330,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Layout darkMode={darkMode} setDarkMode={setDarkMode} />
+      <RoutedLayout darkMode={darkMode} setDarkMode={setDarkMode} />
     </BrowserRouter>
   );
 }
