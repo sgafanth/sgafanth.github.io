@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, NavLink, Navigate, useLocation } from "react-router-dom";
-import { Github, Linkedin, Mail, Menu, X } from "lucide-react";
+import { ArrowUp, Github, Linkedin, Mail, Menu, X } from "lucide-react";
 import Home from "./pages/Home";
 import { getTheme } from "./theme";
 import "./App.css";
 
-const HOME_SECTION_IDS = ["latest-projects", "skill-toolkit", "professional-experience", "education"];
+const HOME_SECTION_IDS = ["latest-projects", "professional-experience", "education", "skill-toolkit"];
 const NO_SECTION_IDS = [];
 
 function Layout({ darkMode, setDarkMode }) {
   const theme = getTheme(darkMode);
   const { pathname } = useLocation();
   const isHomePage = pathname === "/";
+  const desktopActionTotal = 4;
   const [activeSection, setActiveSection] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showScrollTopButton, setShowScrollTopButton] = useState(false);
+  const [visibleDesktopActions, setVisibleDesktopActions] = useState(0);
   const scrollToTop = () => {
     setActiveSection("");
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -51,11 +54,6 @@ function Layout({ darkMode, setDarkMode }) {
   }, [isHomePage, sectionIds]);
 
   useEffect(() => {
-    document.body.classList.toggle("mobile-menu-open", mobileMenuOpen);
-    return () => document.body.classList.remove("mobile-menu-open");
-  }, [mobileMenuOpen]);
-
-  useEffect(() => {
     const closeMenuOnDesktop = () => {
       if (window.innerWidth > 900) {
         setMobileMenuOpen(false);
@@ -66,12 +64,35 @@ function Layout({ darkMode, setDarkMode }) {
     return () => window.removeEventListener("resize", closeMenuOnDesktop);
   }, []);
 
+  useEffect(() => {
+    const updateScrollButtonVisibility = () => {
+      const scrollY = window.scrollY;
+      const revealThresholds = [340, 520, 700, 880];
+      const revealCount = revealThresholds.filter((threshold) => scrollY >= threshold).length;
+
+      setShowScrollTopButton(scrollY > 280);
+      setVisibleDesktopActions((prev) => (prev === revealCount ? prev : revealCount));
+    };
+
+    window.addEventListener("scroll", updateScrollButtonVisibility, { passive: true });
+
+    return () => window.removeEventListener("scroll", updateScrollButtonVisibility);
+  }, []);
+
+  const handleScrollToTopClick = () => {
+    setActiveSection("");
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
   const handleSectionClick = (sectionId) => {
     setActiveSection(sectionId);
     setMobileMenuOpen(false);
   };
   const getSectionLinkClass = (sectionId) =>
     `nav-sublink ${theme.sidebarSubLink} ${activeSection === sectionId ? theme.sidebarLinkActive : ""}`;
+
+  const getDesktopActionRevealClass = (index) =>
+    visibleDesktopActions >= desktopActionTotal - index ? "is-visible" : "";
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
@@ -84,9 +105,9 @@ function Layout({ darkMode, setDarkMode }) {
           className={`mobile-menu-button ${theme.toggleButton} shadow-lg`}
           aria-expanded={mobileMenuOpen}
           aria-controls="mobile-navigation-drawer"
-          aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label={mobileMenuOpen ? "Toggle navigation menu" : "Open navigation menu"}
         >
-          {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+          <Menu size={18} />
           Menu
         </button>
 
@@ -123,13 +144,6 @@ function Layout({ darkMode, setDarkMode }) {
                   Projects
                 </a>
                 <a
-                  href="#skill-toolkit"
-                  onClick={() => handleSectionClick("skill-toolkit")}
-                  className={getSectionLinkClass("skill-toolkit")}
-                >
-                  Skill Toolkit
-                </a>
-                <a
                   href="#professional-experience"
                   onClick={() => handleSectionClick("professional-experience")}
                   className={getSectionLinkClass("professional-experience")}
@@ -142,6 +156,13 @@ function Layout({ darkMode, setDarkMode }) {
                   className={getSectionLinkClass("education")}
                 >
                   Education
+                </a>
+                <a
+                  href="#skill-toolkit"
+                  onClick={() => handleSectionClick("skill-toolkit")}
+                  className={getSectionLinkClass("skill-toolkit")}
+                >
+                  Skills
                 </a>
               </div>
             )}
@@ -203,6 +224,17 @@ function Layout({ darkMode, setDarkMode }) {
               </a>
             </div>
           )}
+
+          <div className="mobile-drawer-footer">
+            <button
+              type="button"
+              onClick={closeMobileMenu}
+              className={`mobile-drawer-close ${theme.toggleButton}`}
+              aria-label="Close navigation menu"
+            >
+              <X size={18} />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -227,13 +259,6 @@ function Layout({ darkMode, setDarkMode }) {
                   Projects
                 </a>
                 <a
-                  href="#skill-toolkit"
-                  onClick={() => handleSectionClick("skill-toolkit")}
-                  className={getSectionLinkClass("skill-toolkit")}
-                >
-                  Skills
-                </a>
-                <a
                   href="#professional-experience"
                   onClick={() => handleSectionClick("professional-experience")}
                   className={getSectionLinkClass("professional-experience")}
@@ -246,6 +271,13 @@ function Layout({ darkMode, setDarkMode }) {
                   className={getSectionLinkClass("education")}
                 >
                   Education
+                </a>
+                <a
+                  href="#skill-toolkit"
+                  onClick={() => handleSectionClick("skill-toolkit")}
+                  className={getSectionLinkClass("skill-toolkit")}
+                >
+                  Skills
                 </a>
               </div>
             )}
@@ -266,7 +298,7 @@ function Layout({ darkMode, setDarkMode }) {
               <a
                 href="/Andy-Fanthome-CV.pdf"
                 download
-                className={`sidebar-action download-cv-action ${theme.primaryButton}`}
+                className={`sidebar-action desktop-action-reveal ${getDesktopActionRevealClass(0)} download-cv-action ${theme.primaryButton}`}
               >
                 <span className="sidebar-action-icon" aria-hidden="true">
                   CV
@@ -277,7 +309,7 @@ function Layout({ darkMode, setDarkMode }) {
                 href="https://www.linkedin.com/in/andyfanthome/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`sidebar-action ${theme.sidebarAction}`}
+                className={`sidebar-action desktop-action-reveal ${getDesktopActionRevealClass(1)} ${theme.sidebarAction}`}
               >
                 <span className="sidebar-action-icon" aria-hidden="true">
                   <Linkedin size={16} />
@@ -288,14 +320,17 @@ function Layout({ darkMode, setDarkMode }) {
                 href="https://github.com/sgafanth"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`sidebar-action ${theme.sidebarAction}`}
+                className={`sidebar-action desktop-action-reveal ${getDesktopActionRevealClass(2)} ${theme.sidebarAction}`}
               >
                 <span className="sidebar-action-icon" aria-hidden="true">
                   <Github size={16} />
                 </span>
                 <span className="sidebar-action-label">GitHub</span>
               </a>
-              <a href="mailto:fanthome.andy@gmail.com" className={`sidebar-action ${theme.sidebarAction}`}>
+              <a
+                href="mailto:fanthome.andy@gmail.com"
+                className={`sidebar-action desktop-action-reveal ${getDesktopActionRevealClass(3)} ${theme.sidebarAction}`}
+              >
                 <span className="sidebar-action-icon" aria-hidden="true">
                   <Mail size={16} />
                 </span>
@@ -312,6 +347,15 @@ function Layout({ darkMode, setDarkMode }) {
           <Route path="/work-experience" element={<Navigate to="/#professional-experience" replace />} />
         </Routes>
       </main>
+
+      <button
+        type="button"
+        className={`scroll-top-button ${showScrollTopButton ? "is-visible" : ""} ${theme.primaryButton}`}
+        onClick={handleScrollToTopClick}
+        aria-label="Scroll to top"
+      >
+        <ArrowUp size={28} />
+      </button>
     </div>
   );
 }
