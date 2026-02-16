@@ -172,24 +172,24 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
 
   const projects = {
     "Customer Complaint Triage Tool": [
-      "Investigating if NLP and machine learning can be used to correctly label plain-text complaints sent to financial institutions."
+      "Investigating if NLP and machine learning can be used to correctly label plain-text complaints sent to financial institutions. [In progress]"
     ],
 
     "Logo Identification - Computer Vision": [
-      "Using computer vision to match unknown logos to ones in a reference library.",
+      "Using computer vision to match unknown logos to ones in a reference library. [In progress]",
       
     ],
 
     "Analysis and Forecasting Redunancies": [
-      "How well can historical and recent data industry and market data be used to predict changes in redundancy rates?"
+      "How well can historical and recent data industry and market data be used to predict changes in redundancy rates? [In progress]"
     ],
 
     "Sentiment Analysis in News": [
-      "Looking at changes in discourse in the past couple of decades."
+      "Looking at changes in discourse in the past couple of decades. [In progress]"
     ],
 
     "Downfall Video Game": [
-      "A top-down 2D shoot-em-up game made for my Computer Science A-Level coursework."
+      "A top-down 2D shoot-em-up game made for my Computer Science A-Level coursework. [Pending upload]"
     ],
   };
 
