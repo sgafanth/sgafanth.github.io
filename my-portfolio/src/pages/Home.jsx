@@ -85,46 +85,72 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
       ]
     },
     {
-      title: "Junior Data Scientist - 12 Month University Industrial Placement",
-      company: "Alder Hey Innovation Hub",
-      companyUrl: "https://www.alderheyinnovation.com/",
-      logoUrl: "images/alderhey.webp",
-      period: "2021 - 2022",
-      summary: "Developed a clinical risk prediction tool that achieved an ROC of 0.85, outperforming comparable studies by 7.6% while analysing 160,000+ patient records.",
-      achievements: [
-        "**Clinical risk model:** Built Random Forest and CatBoost models to flag readmission risk, achieving ROC 0.85 and outperforming other studies by 7.6%.",
-        "**Large disparate datasets:** Used SQL and Python to extract, preprocess, and analyse 160,000+ patient records spanning 5 years.",
-        "**Operational insights:** Visualised weekly readmission risk scores for hundreds of patients using Microsoft PowerBI.",
-        "**Model performance analysis:** Tracked model performance through live time-series graphs, saving over 1 hour per week of manual testing.",
-        "**Delivered at pace:** Worked in Agile 2-week sprints with daily scrums to deliver features ahead of schedule."
-      ],
-      skills: [
+      title: "BSc (Hons) Computer Science Student",
+      company: "University of Liverpool",
+      companyUrl: "https://www.liverpool.ac.uk/",
+      logoUrl: "images/liverpool_logo_square.png",
+      period: "2019 - 2023", 
+      summary: "First-class Computer Science graduate specialising in AI, data science, and big data; built and evaluated cloud-deployed NLP applications achieving measurable performance and user satisfaction.", 
+      achievements: [ 
+        "**Achieved academic distinction:** Graduated with First Class Honours in BSc Computer Science.", 
+        "**Built NLP application:** Developed a chatbot web app using HuggingFace, Flask, and Python.", 
+        "**Validated user experience:** Evaluated the chatbot with 20 users, with 95% reporting an overall good experience." 
+      ], 
+      skills: [ 
         "Python",
-        "SQL",
-        "Machine Learning",
-        "CatBoost",
-        "Healthcare Data Analysis",
-        "Exploratory Data Analysis",
-        "Data Preprocessing",
-        "Time-Series Analysis",
-        "Agile Development"
-      ]
-    },
+        "Machine Learning", 
+        "Natural Language Processing", 
+        "HuggingFace Transformers", 
+        "Flask", 
+        "Google Cloud Run", 
+        "Data Structures & Algorithms", 
+        "Big Data Analytics", 
+        "Data Mining & Visualisation", 
+        "Artificial Intelligence", 
+        "Software Engineering" 
+      ] },
+
+    // {
+    //   title: "Junior Data Scientist - 12 Month University Industrial Placement",
+    //   company: "Alder Hey Innovation Hub",
+    //   companyUrl: "https://www.alderheyinnovation.com/",
+    //   logoUrl: "images/alderhey.webp",
+    //   period: "2021 - 2022",
+    //   summary: "Developed a clinical risk prediction tool that achieved an ROC of 0.85, outperforming comparable studies by 7.6% while analysing 160,000+ patient records.",
+    //   achievements: [
+    //     "**Clinical risk model:** Built Random Forest and CatBoost models to flag readmission risk, achieving ROC 0.85 and outperforming other studies by 7.6%.",
+    //     "**Large disparate datasets:** Used SQL and Python to extract, preprocess, and analyse 160,000+ patient records spanning 5 years.",
+    //     "**Operational insights:** Visualised weekly readmission risk scores for hundreds of patients using Microsoft PowerBI.",
+    //     "**Model performance analysis:** Tracked model performance through live time-series graphs, saving over 1 hour per week of manual testing.",
+    //     "**Delivered at pace:** Worked in Agile 2-week sprints with daily scrums to deliver features ahead of schedule."
+    //   ],
+    //   skills: [
+    //     "Python",
+    //     "SQL",
+    //     "Machine Learning",
+    //     "CatBoost",
+    //     "Healthcare Data Analysis",
+    //     "Exploratory Data Analysis",
+    //     "Data Preprocessing",
+    //     "Time-Series Analysis",
+    //     "Agile Development"
+    //   ]
+    // },
     
-    {
-      title: "Software Engineer [Work Experience]",
-      company: "Thomson Reuters [Now LSEG]",
-      companyUrl: "https://www.thomsonreuters.com/",
-      logoUrl: "images/Thomson-Reuters-Logo.png",
-      period: "AUG 2018 – SEP 2018",
-      summary: "Two-week software engineering placement, delivering automation scripts that improved operational efficiency.",
-      achievements: [
-        "**Process Automation:** Automated a manual Hadoop Hive table-splitting process in Python, saving **30 minutes per day** and reducing human error.",
-        "**Stream Validation Tooling:** Built a RegEx-based Python script to compare Kafka output topics with YAML configurations, auto-generating missing topics and saving **2+ hours per week**.",
-        "**Independent Delivery:** Delivered listed engineering tasks a week ahead of schedule within a two-week placement."
-      ],
-      skills: ["Python", "Hadoop Hive", "Kafka", "RegEx", "Automation"]
-    }
+    // {
+    //   title: "Software Engineer [Work Experience]",
+    //   company: "Thomson Reuters [Now LSEG]",
+    //   companyUrl: "https://www.thomsonreuters.com/",
+    //   logoUrl: "images/Thomson-Reuters-Logo.png",
+    //   period: "AUG 2018 – SEP 2018",
+    //   summary: "Two-week software engineering placement, delivering automation scripts that improved operational efficiency.",
+    //   achievements: [
+    //     "**Process Automation:** Automated a manual Hadoop Hive table-splitting process in Python, saving **30 minutes per day** and reducing human error.",
+    //     "**Stream Validation Tooling:** Built a RegEx-based Python script to compare Kafka output topics with YAML configurations, auto-generating missing topics and saving **2+ hours per week**.",
+    //     "**Independent Delivery:** Delivered listed engineering tasks a week ahead of schedule within a two-week placement."
+    //   ],
+    //   skills: ["Python", "Hadoop Hive", "Kafka", "RegEx", "Automation"]
+    // }
   ];
 
   const sideProjects = [
@@ -145,25 +171,25 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
   ];
 
   const projects = {
-    "Customer Complaint Triage Tool - Natural Language Processing (NLP)": [
-      "Insert brief overview."
+    "Customer Complaint Triage Tool": [
+      "Investigating if NLP and machine learning can be used to correctly label plain-text complaints sent to financial institutions."
     ],
 
     "Logo Identification - Computer Vision": [
-      "Insert brief overview",
+      "Using computer vision to match unknown logos to ones in a reference library.",
       
     ],
 
     "Analysis and Forecasting Redunancies": [
-      "Insert brief overview"
+      "How well can historical and recent data industry and market data be used to predict changes in redundancy rates?"
     ],
 
     "Sentiment Analysis in News": [
-      "Insert brief overview"
+      "Looking at changes in discourse in the past couple of decades."
     ],
 
     "Downfall Video Game": [
-      "Insert brief overview"
+      "A top-down 2D shoot-em-up game made for my Computer Science A-Level coursework."
     ],
   };
 
@@ -192,18 +218,14 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
     "Experimentation & Analytical Thinking": [
       "Large-scale experimentation",
       "Hyperparameter optimisation",
-      "Benchmarking against baselines",
       "Model performance evaluation",
-      "Dataset feasibility analysis"
     ],
 
     "Delivery, Communication & Impact": [
       "Dashboard Creation",
       "Horizon Scanning",
-      "Stakeholder decision support",
       "Technical presentations (Audience of 100+)",
-      "Agile Development",
-      "Mentoring junior colleagues"
+      "Collaboration"
     ]
   };
 
@@ -232,7 +254,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
                 Data Scientist
               </div> */}
               
-              <h1 className={`text-4xl md:text-5xl lg:text-5xl font-bold mb-2 md:mb-6 leading-tight tracking-tight ${theme.heroHeading}`}>
+              <h1 className={`text-5xl md:text-6xl lg:text-6xl font-bold mb-2 md:mb-1 leading-tight tracking-tight ${theme.heroHeading}`}>
                 Andy&nbsp;
                 <span className={theme.heroAccentText}>
                    Fanthome
@@ -241,22 +263,14 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
               
               <div className="hidden md:block">
                 <p className={`text-xl md:text-2xl ${theme.bodyMuted} mb-8 leading-relaxed font-light`}>
-                  Insert intro. something about always following innovation.
+                  Welcome to my portfolio.
                 </p>
                 
                 <div className="flex flex-col items-start gap-3">
-                  <a 
-                    href="/Andy-Fanthome-CV.pdf"
-                    download
-                    className={`inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 ${theme.primaryButton} rounded-full transition-all text-sm md:text-base font-semibold shadow-lg ${theme.primaryButtonShadow} group`}
-                  >
-                    Download CV
-                    <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
-                  </a>
                   <div className="hidden md:flex items-center gap-4">
                     <a 
                       href="mailto:andy@fantho.me"
-                      className={`inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 border-2 ${theme.outlineButton} rounded-full transition-all text-sm md:text-base font-medium`}
+                      className={`inline-flex items-center gap-2 px-6 py-3 md:px-5 md:py-2 border-2 ${theme.outlineButton} rounded-full transition-all text-sm md:text-base font-medium`}
                     >
                       <Mail size={18} />
                       Contact
@@ -265,7 +279,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
                       href="https://www.linkedin.com/in/andyfanthome/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 border-2 ${theme.outlineButton} rounded-full transition-all text-sm md:text-base font-medium`}
+                      className={`inline-flex items-center gap-2 px-6 py-3 md:px-5 md:py-2 border-2 ${theme.outlineButton} rounded-full transition-all text-sm md:text-base font-medium`}
                     >
                       <Linkedin size={18} />
                       LinkedIn
@@ -274,12 +288,20 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
                       href="https://github.com/sgafanth"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 border-2 ${theme.outlineButton} rounded-full transition-all text-sm md:text-base font-medium`}
+                      className={`inline-flex items-center gap-2 px-6 py-3 md:px-5 md:py-2 border-2 ${theme.outlineButton} rounded-full transition-all text-sm md:text-base font-medium`}
                     >
                       <Github size={18} />
                       GitHub
                     </a>
                   </div>
+                  <a 
+                    href="/Andy-Fanthome-CV.pdf"
+                    download
+                    className={`inline-flex items-center gap-2 px-6 py-3 md:px-6 md:py-2 ${theme.primaryButton} rounded-full transition-all text-sm md:text-base font-semibold shadow-lg ${theme.primaryButtonShadow} group`}
+                  >
+                    Download CV
+                    <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
+                  </a>
                 </div>
               </div>
             </div>
@@ -296,18 +318,10 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
 
             <div className="max-w-3xl mx-auto z-10 order-3 md:hidden text-center">
               <p className={`text-xl ${theme.bodyMuted} mb-8 leading-relaxed font-light`}>
-                Insert intro. something about always following innovation.
+              What's up and welcome to my website.
               </p>
 
               <div className="flex flex-col items-center gap-3">
-                <a 
-                  href="/Andy-Fanthome-CV.pdf"
-                  download
-                  className={`inline-flex items-center gap-2 px-6 py-3 ${theme.primaryButton} rounded-full transition-all text-sm font-semibold shadow-lg ${theme.primaryButtonShadow} group`}
-                >
-                  Download CV
-                  <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
-                </a>
                 <div className="flex flex-col items-center gap-2.5">
                   <a 
                     href="mailto:andy@fantho.me"
@@ -330,11 +344,19 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`inline-flex items-center gap-2 px-6 py-3 border-2 ${theme.outlineButton} rounded-full transition-all text-sm font-medium`}
-                  >
-                    <Github size={18} />
-                    GitHub
-                  </a>
+                    >
+                      <Github size={18} />
+                      GitHub
+                    </a>
                 </div>
+                <a 
+                  href="/Andy-Fanthome-CV.pdf"
+                  download
+                  className={`inline-flex items-center gap-2 px-6 py-3 ${theme.primaryButton} rounded-full transition-all text-sm font-semibold shadow-lg ${theme.primaryButtonShadow} group`}
+                >
+                  Download CV
+                  <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
+                </a>
               </div>
             </div>
           </div>
@@ -342,23 +364,23 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
       </section>
 
       {/* Stats Grid */}
-      <section className={`py-12 ${theme.statsSection}`}>
+      <section className={`py-6 ${theme.statsSection}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center md:text-left">
-              <div className={`text-4xl lg:text-5xl font-bold mb-1 ${theme.heading}`}>↑50%</div>
+              <div className={`text-2xl lg:text-3xl font-bold mb-1 ${theme.heading}`}>↑50%</div>
               <div className={`text-sm tracking-wide font-semibold ${theme.bodySubtle}`}>Increase in model performance</div>
             </div>
             <div className="text-center md:text-left">
-              <div className={`text-4xl lg:text-5xl font-bold mb-1 ${theme.heading}`}>4 Years</div>
+              <div className={`text-2xl lg:text-3xl font-bold mb-1 ${theme.heading}`}>2 Years</div>
               <div className={`text-sm tracking-wide font-semibold ${theme.bodySubtle}`}>Industry experience</div>
             </div>
             <div className="text-center md:text-left">
-              <div className={`text-4xl lg:text-5xl font-bold mb-1 ${theme.heading}`}>↓99.8%</div>
+              <div className={`text-2xl lg:text-3xl font-bold mb-1 ${theme.heading}`}>↓99.8%</div>
               <div className={`text-sm tracking-wide font-semibold ${theme.bodySubtle}`}>Latency reduction</div>
             </div>
             <div className="text-center md:text-left">
-              <div className={`text-4xl lg:text-5xl font-bold mb-1 ${theme.heading}`}>45</div>
+              <div className={`text-2xl lg:text-3xl font-bold mb-1 ${theme.heading}`}>45</div>
               <div className={`text-sm tracking-wide font-semibold ${theme.bodySubtle}`}>Million rows of user data</div>
             </div>
           </div>
@@ -367,10 +389,13 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
 
 
       {/* Projects */}
-      <section id="latest-projects" className="section-anchor py-20 px-6 md:px-8">
+      <section id="latest-projects" className={`section-anchor py-20 px-6 md:px-8 ${theme.educationSection}`}>
         <div className="max-w-7xl mx-auto">
           <div className="mb-16">
-            <h2 className={`text-4xl md:text-5xl font-bold mb-4 tracking-tight ${theme.heading}`}>Projects</h2>
+            <h2 className={`text-4xl md:text-5xl font-bold mb-4 tracking-tight ${theme.heading}`}>My latest projects</h2>
+            <p className={`text-xl ${theme.bodyMuted} max-w-2xl`}>
+          Recent blogs and repositories looking into different areas of data science and machine learning.
+          </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -379,9 +404,9 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
                 <h3 className={`text-lg font-bold mb-6 tracking-tight flex items-center gap-2 ${theme.heading}`}>
                     {category}
                 </h3>
-                <div className="space-y-3">
+                <div className="space-y-1">
                   {items.map((skill, i) => (
-                    <div key={i} className={`flex items-center gap-2 text-sm ${theme.body}`}>
+                    <div key={i} className={`flex items-center text-sm ${theme.body}`}>
                       <div className={`w-1 h-1 rounded-full ${theme.dot}`}></div>
                       {skill}
                     </div>
@@ -393,6 +418,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
         </div>
         <div className="max-w-7xl mx-auto mt-20 md:mt-24">
           <h2 className={`text-3xl font-bold mb-12 tracking-tight ${theme.heading}`}>All Projects</h2>
+          
           <div className="grid md:grid-cols-2 gap-8">
             {sideProjects.map((project, idx) => (
               <div 
@@ -421,46 +447,14 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
         </div>
       </section>
 
-
-      {/* Skills */}
-      <section id="skill-toolkit" className={`section-anchor py-24 px-6 md:px-8 ${theme.sectionSoftBg}`}>
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <h2 className={`text-4xl md:text-5xl font-bold mb-4 tracking-tight ${theme.heading}`}>Skill Toolkit</h2>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {Object.entries(skills).map(([category, items], idx) => (
-              <div key={idx} className={`p-6 ${theme.projectCard} rounded-2xl transition-all duration-300`}>
-                <h3 className={`text-lg font-bold mb-6 tracking-tight flex items-center gap-2 ${theme.heading}`}>
-                    {idx === 0 && <Brain size={18} className={theme.skillIcon1} />}
-                    {idx === 1 && <Database size={18} className={theme.skillIcon2} />}
-                    {idx === 2 && <Beaker size={18} className={theme.skillIcon3} />}
-                    {idx === 3 && <Briefcase size={18} className={theme.skillIcon4} />}
-                    {category}
-                </h3>
-                <div className="space-y-3">
-                  {items.map((skill, i) => (
-                    <div key={i} className={`flex items-center gap-2 text-sm ${theme.body}`}>
-                      <div className={`w-1 h-1 rounded-full ${theme.dot}`}></div>
-                      {skill}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Professional Experience */}
       <section id="professional-experience" className="section-anchor py-24 px-6 md:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
               <h2 className={`text-4xl md:text-5xl font-bold mb-4 tracking-tight ${theme.heading}`}>Professional Experience</h2>
-              <p className={`text-lg ${theme.bodyMuted} max-w-2xl`}>
-                A track record of utilising emerging technology to deliver high-performing solutions.
+              <p className={`text-xl ${theme.bodyMuted} max-w-2xl`}>
+                A track record of utilising emerging technology to deliver solutions at pace.
               </p>
             </div>
             <a
@@ -547,7 +541,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
                 Education
               </h2>
               <p className={`text-lg mb-8 ${theme.bodyMuted}`}>
-                First-class computer science graduate specialising in AI, data science, and big data; built and evaluated cloud-deployed NLP applications achieving notable performance and 95% user satisfaction.
+                Built and evaluated cloud-deployed NLP applications for final year project, achieving notable performance and 95% user satisfaction. Awarded a first-class (74%) degree.
               </p>
 
               <div className={`p-8 rounded-2xl ${theme.educationCard}`}>
@@ -560,12 +554,14 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
                 </div>
                 <div className="grid md:grid-cols-2 gap-4 text-sm">
                   <ul className={`space-y-2 ${theme.body}`}>
-                    <li>• Natural Language Processing</li>
-                    <li>• Big Data</li>
+                    <li>• Data Science</li>
+                    <li>• Software Engineering</li>
+                    <li>• Systems, Infrastructure & Security</li>
                   </ul>
                   <ul className={`space-y-2 ${theme.body}`}>
-                    <li>• Transformer Models</li>
                     <li>• Artificial Intelligence</li>
+                    <li>• Algorithms, Theory & Mathematics</li>
+                    
                   </ul>
                 </div>
               </div>
@@ -584,12 +580,43 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
         </div>
       </section>
 
+      {/* Skills */}
+      <section id="skill-toolkit" className={`section-anchor py-24 px-6 md:px-8 ${theme.sectionSoftBg}`}>
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-16">
+            <h2 className={`text-4xl md:text-5xl font-bold mb-4 tracking-tight ${theme.heading}`}>Skills</h2>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {Object.entries(skills).map(([category, items], idx) => (
+              <div key={idx} className={`p-6 ${theme.projectCard} rounded-2xl transition-all duration-300`}>
+                <h3 className={`text-lg font-bold mb-6 tracking-tight flex items-center gap-2 ${theme.heading}`}>
+                    {idx === 0 && <Brain size={18} className={theme.skillIcon1} />}
+                    {idx === 1 && <Database size={18} className={theme.skillIcon2} />}
+                    {idx === 2 && <Beaker size={18} className={theme.skillIcon3} />}
+                    {idx === 3 && <Briefcase size={18} className={theme.skillIcon4} />}
+                    {category}
+                </h3>
+                <div className="space-y-3">
+                  {items.map((skill, i) => (
+                    <div key={i} className={`flex items-center gap-2 text-sm ${theme.body}`}>
+                      <div className={`w-1 h-1 rounded-full ${theme.dot}`}></div>
+                      {skill}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className={`py-32 px-6 md:px-8 ${theme.ctaSection}`}>
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Like what you see?</h2>
           <p className={`text-xl mb-12 leading-relaxed max-w-2xl mx-auto ${theme.ctaBody}`}>
-            I am available for Senior Data Science roles. Reach out to have a chat.
+            I am available for Data Science roles. Reach out to have a chat.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <a 
