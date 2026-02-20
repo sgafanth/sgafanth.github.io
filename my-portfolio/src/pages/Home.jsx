@@ -37,7 +37,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
       companyUrl: "https://www.gov.uk/government/organisations/department-for-work-pensions",
       logoUrl: "images/dwp_crown_square.jpeg", 
       period: "2025 - Present",
-      summary: "Utilising emerging technologies to deliver solutions for internal stakeholders.",
+      summary: "Utilising technology to deliver solutions for internal stakeholders.",
       achievements: [
         "**Multiple Projects Involving: **NLP, Agentic AI, classification, transformers, and computer vision. ",
         "**Horizon Scanning:** To identify and share knowledge on emerging technologies and threats.",
@@ -90,24 +90,19 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
       companyUrl: "https://www.liverpool.ac.uk/",
       logoUrl: "images/liverpool_logo_square.png",
       period: "2019 - 2023", 
-      summary: "First-class Computer Science graduate specialising in AI, data science, and big data; built and evaluated cloud-deployed NLP applications achieving measurable performance and user satisfaction.", 
+      summary: "First-class Computer Science graduate.", 
       achievements: [ 
         "**Achieved academic distinction:** Graduated with First Class Honours in BSc Computer Science.", 
-        "**Built NLP application:** Developed a chatbot web app using HuggingFace, Flask, and Python.", 
-        "**Validated user experience:** Evaluated the chatbot with 20 users, with 95% reporting an overall good experience." 
+        "**Built NLP application:** Developed a chatbot web app using HuggingFace (GPT-2), Flask, and Python.", 
       ], 
       skills: [ 
-        "Python",
-        "Machine Learning", 
         "Natural Language Processing", 
-        "HuggingFace Transformers", 
-        "Flask", 
-        "Google Cloud Run", 
-        "Data Structures & Algorithms", 
-        "Big Data Analytics", 
-        "Data Mining & Visualisation", 
+        "Statistics & Mathematics",
+        "Systems, Infrastructure, & Security",
+        "Algorithms, Data Structures, & Theory",
         "Artificial Intelligence", 
-        "Software Engineering" 
+        "Software Engineering",
+        "Data Mining & Visualisation", 
       ] },
 
     // {
@@ -318,7 +313,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
 
             <div className="max-w-3xl mx-auto z-10 order-3 md:hidden text-center">
               <p className={`text-xl ${theme.bodyMuted} mb-8 leading-relaxed font-light`}>
-              What's up and welcome to my website.
+              Welcome to my portfolio.
               </p>
 
               <div className="flex flex-col items-center gap-3">
@@ -541,7 +536,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
                 Education
               </h2>
               <p className={`text-lg mb-8 ${theme.bodyMuted}`}>
-                Built and evaluated cloud-deployed NLP applications for final year project, achieving notable performance and 95% user satisfaction. Awarded a first-class (74%) degree.
+                Awarded a first-class (74%) degree. Built and evaluated cloud-deployed NLP applications for final year project, achieving notable performance and 95% user satisfaction. 
               </p>
 
               <div className={`p-8 rounded-2xl ${theme.educationCard}`}>

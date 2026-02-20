@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, NavLink, Navigate, useLocation } from "react-router-dom";
 import { ArrowUp, Github, Linkedin, Mail, Menu, X } from "lucide-react";
 import Home from "./pages/Home";
+import EmergingSignalsExplorer from "./pages/Emerging-signals-explorer";
 import { getTheme } from "./theme";
 import "./App.css";
 
@@ -164,6 +165,13 @@ function Layout({ darkMode, setDarkMode }) {
                 >
                   Skills
                 </a>
+                <NavLink
+                  to="/emerging-signals-explorer"
+                  onClick={closeMobileMenu}
+                  className={`nav-sublink ${theme.sidebarSubLink}`}
+                >
+                  Emerging Signals
+                </NavLink>
               </div>
             )}
             {!isHomePage && (
@@ -279,6 +287,12 @@ function Layout({ darkMode, setDarkMode }) {
                 >
                   Skills
                 </a>
+                <NavLink
+                  to="/emerging-signals-explorer"
+                  className={`nav-sublink ${theme.sidebarSubLink}`}
+                >
+                  Emerging Signals
+                </NavLink>
               </div>
             )}
             {!isHomePage && (
@@ -344,6 +358,10 @@ function Layout({ darkMode, setDarkMode }) {
       <main className="content">
         <Routes>
           <Route path="/" element={<Home darkMode={darkMode} setDarkMode={setDarkMode} />} />
+          <Route
+            path="/emerging-signals-explorer"
+            element={<EmergingSignalsExplorer darkMode={darkMode} setDarkMode={setDarkMode} />}
+          />
           <Route path="/work-experience" element={<Navigate to="/#professional-experience" replace />} />
         </Routes>
       </main>
