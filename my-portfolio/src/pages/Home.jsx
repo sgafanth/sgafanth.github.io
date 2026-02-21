@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { getTheme } from '../theme';
 import { 
   Mail, 
@@ -16,6 +17,7 @@ import {
 } from 'lucide-react';
 
 const Portfolio = ({ darkMode, setDarkMode }) => {
+  const EMERGING_SIGNALS_PROJECT = "Emerging Signals - A horizon scanning tool";
   const theme = getTheme(darkMode);
   const duckAudioRef = useRef(null);
 
@@ -166,22 +168,26 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
   ];
 
   const projects = {
+     "Emerging Signals - A horizon scanning tool": [
+      "Using AWS services, huggingface sentence-embedder, and rss-feeds to display trends and emerging technology/threats to aid horizon scanning. [In progress]",
+      
+    ],
     "Customer Complaint Triage Tool": [
       "Investigating if NLP and machine learning can be used to correctly label plain-text complaints sent to financial institutions. [In progress]"
     ],
 
-    "Logo Identification - Computer Vision": [
-      "Using computer vision to match unknown logos to ones in a reference library. [In progress]",
+    // "Logo Identification - Computer Vision": [
+    //   "Using computer vision to match unknown logos to ones in a reference library. [In progress]",
       
-    ],
+    // ],
 
-    "Analysis and Forecasting Redunancies": [
-      "How well can historical and recent data industry and market data be used to predict changes in redundancy rates? [In progress]"
-    ],
+    // "Analysis and Forecasting Redunancies": [
+    //   "How well can historical and recent data industry and market data be used to predict changes in redundancy rates? [In progress]"
+    // ],
 
-    "Sentiment Analysis in News": [
-      "Looking at changes in discourse in the past couple of decades. [In progress]"
-    ],
+    // "Sentiment Analysis in News": [
+    //   "Looking at changes in discourse in the past couple of decades. [In progress]"
+    // ],
 
     "Downfall Video Game": [
       "A top-down 2D shoot-em-up game made for my Computer Science A-Level coursework. [Pending upload]"
@@ -395,19 +401,39 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {Object.entries(projects).map(([category, items], idx) => (
-              <div key={idx} className={`p-6 ${theme.projectCard} rounded-2xl transition-all duration-300`}>
-                <h3 className={`text-lg font-bold mb-6 tracking-tight flex items-center gap-2 ${theme.heading}`}>
+              category === EMERGING_SIGNALS_PROJECT ? (
+                <Link
+                  key={idx}
+                  to="/emerging-signals-explorer"
+                  className={`project-card-clickable block p-6 ${theme.projectCard} rounded-2xl transition-all duration-300`}
+                >
+                  <h3 className={`text-lg font-bold mb-6 tracking-tight flex items-center gap-2 ${theme.heading}`}>
                     {category}
-                </h3>
-                <div className="space-y-1">
-                  {items.map((skill, i) => (
-                    <div key={i} className={`flex items-center text-sm ${theme.body}`}>
-                      <div className={`w-1 h-1 rounded-full ${theme.dot}`}></div>
-                      {skill}
-                    </div>
-                  ))}
+                  </h3>
+                  <div className="space-y-1">
+                    {items.map((skill, i) => (
+                      <div key={i} className={`flex items-center text-sm ${theme.body}`}>
+                        <div className={`w-1 h-1 rounded-full ${theme.dot}`}></div>
+                        {skill}
+                      </div>
+                    ))}
+                  </div>
+                </Link>
+              ) : (
+                <div key={idx} className={`p-6 ${theme.projectCard} rounded-2xl transition-all duration-300`}>
+                  <h3 className={`text-lg font-bold mb-6 tracking-tight flex items-center gap-2 ${theme.heading}`}>
+                    {category}
+                  </h3>
+                  <div className="space-y-1">
+                    {items.map((skill, i) => (
+                      <div key={i} className={`flex items-center text-sm ${theme.body}`}>
+                        <div className={`w-1 h-1 rounded-full ${theme.dot}`}></div>
+                        {skill}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )
             ))}
           </div>
         </div>
