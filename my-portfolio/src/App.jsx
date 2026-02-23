@@ -165,13 +165,13 @@ function Layout({ darkMode, setDarkMode }) {
                 >
                   Skills
                 </a>
-                <NavLink
+                {/* <NavLink
                   to="/emerging-signals-explorer"
                   onClick={closeMobileMenu}
                   className={`nav-sublink ${theme.sidebarSubLink}`}
                 >
                   Emerging Signals
-                </NavLink>
+                </NavLink> */}
               </div>
             )}
             {!isHomePage && (
@@ -287,12 +287,12 @@ function Layout({ darkMode, setDarkMode }) {
                 >
                   Skills
                 </a>
-                <NavLink
+                {/* <NavLink
                   to="/emerging-signals-explorer"
                   className={`nav-sublink ${theme.sidebarSubLink}`}
                 >
                   Emerging Signals
-                </NavLink>
+                </NavLink> */}
               </div>
             )}
             {!isHomePage && (

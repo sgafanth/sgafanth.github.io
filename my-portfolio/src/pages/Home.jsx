@@ -225,8 +225,8 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
     "Delivery, Communication & Impact": [
       "Dashboard Creation",
       "Horizon Scanning",
-      "Technical presentations (Audience of 100+)",
-      "Collaboration"
+      "Technical presentations (Audiences of 100+)",
+      "Collaboration & stakeholder engagement"
     ]
   };
 
@@ -247,7 +247,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
       {/* Hero Section */}
       <section className={`pt-[55px] md:pt-14 lg:pt-16 pb-20 px-6 md:px-8 overflow-hidden ${theme.heroSectionBg}`}>
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-2 md:gap-10 lg:gap-14 items-center">
+          <div className="grid lg:grid-cols-2 gap-4 md:gap-10 lg:gap-14 items-center">
             {/* Text Content */}
             <div className="max-w-3xl mx-auto md:mx-0 z-10 order-1 lg:order-1 text-center md:text-left">
               {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-6">
@@ -313,7 +313,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
               <img 
                 src="images/me.jpeg"
                 alt="Andy Fanthome" 
-                className={`relative w-48 lg:w-56 h-auto rounded-[2rem] shadow-2xl transition-all duration-500 ease-out object-cover aspect-[3/4] ${theme.heroImageBg}`}
+                className={`relative w-48  lg:w-56 h-auto rounded-[2rem] shadow-2xl transition-all duration-500 ease-out object-cover aspect-[3/4] ${theme.heroImageBg}`}
               />
             </div>
 
