@@ -122,7 +122,7 @@ const EmergingSignalsExplorer = ({ darkMode, setDarkMode }) => {
 
       if (!res.ok) throw new Error("Failed to fetch articles.");
       const data = await res.json();
-      setArticles(data.results.slice(0, 10));
+      setArticles(data.results.slice(0, 30));
     } catch (err) {
       setError(err.message);
     } finally {
@@ -155,7 +155,7 @@ const EmergingSignalsExplorer = ({ darkMode, setDarkMode }) => {
 
       if (!res.ok) throw new Error("Search failed. Please try again.");
       const data = await res.json();
-      setArticles(data.results.slice(0, 10));
+      setArticles(data.results.slice(0, 30));
     } catch (err) {
       setError(err.message);
     } finally {
@@ -206,9 +206,9 @@ const EmergingSignalsExplorer = ({ darkMode, setDarkMode }) => {
   );
 
   const resultsTitle = searchActive
-    ? `Top 10 — "${searchQuery.trim()}"`
+    ? `Top 30 — "${searchQuery.trim()}"`
     : selectedSignal
-    ? `Top 10 — ${selectedSignal.name}`
+    ? `Top 30 — ${selectedSignal.name}`
     : null;
 
   return (
