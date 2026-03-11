@@ -373,7 +373,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
               <div className={`text-sm tracking-wide font-semibold ${theme.bodySubtle}`}>Increase in model performance</div>
             </div>
             <div className="text-center md:text-left">
-              <div className={`text-2xl lg:text-3xl font-bold mb-1 ${theme.heading}`}>2 Years</div>
+              <div className={`text-2xl lg:text-3xl font-bold mb-1 ${theme.heading}`}>3 Years</div>
               <div className={`text-sm tracking-wide font-semibold ${theme.bodySubtle}`}>Industry experience</div>
             </div>
             <div className="text-center md:text-left">
@@ -474,9 +474,9 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
               <h2 className={`text-4xl md:text-5xl font-bold mb-4 tracking-tight ${theme.heading}`}>Professional Experience</h2>
-              <p className={`text-xl ${theme.bodyMuted} max-w-2xl`}>
+              {/* <p className={`text-xl ${theme.bodyMuted} max-w-2xl`}>
                 A track record of utilising emerging technology to deliver solutions at pace.
-              </p>
+              </p> */}
             </div>
             <a
               href="/Andy-Fanthome-CV.pdf"
