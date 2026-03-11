@@ -229,8 +229,8 @@ const EmergingSignalsExplorer = ({ darkMode, setDarkMode }) => {
             Emerging Signals Explorer
           </h1>
           <p className={`text-lg max-w-2xl ${theme.bodyMuted}`}>
-            Select a signal below or search by keyword to surface the most
-            semantically relevant articles from this week's horizon scan.
+            Select a signal below or search by keyword to display the most
+            relevant articles from the past week.
           </p>
         </div>
       </section>

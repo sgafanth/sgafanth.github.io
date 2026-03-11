@@ -169,7 +169,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
 
   const projects = {
      "Emerging Signals - A horizon scanning tool": [
-      "Using AWS services, huggingface sentence-embedder, and rss-feeds to display trends and emerging technology/threats to aid horizon scanning. [In progress]",
+      "News from ~30 daily RSS feeds saved in AWS, converted to embeddings using HuggingFace and saved to Qdrant, where this data is used to display analytics and relevant news to aid horizon scanning.",
       
     ],
     "Customer Complaint Triage Tool": [
@@ -190,7 +190,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
     // ],
 
     "Downfall Video Game": [
-      "A top-down 2D shoot-em-up game made for my Computer Science A-Level coursework. [Pending upload]"
+      "A top-down 2D shoot-em-up game. [Pending upload]"
     ],
   };
 
