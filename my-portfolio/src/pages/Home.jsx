@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { getTheme } from '../theme';
 import { 
@@ -13,13 +13,75 @@ import {
   Database,
   Beaker,
   Briefcase,
-  ChevronDown, 
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 
+const PLACEHOLDER_COLORS = [
+  { from: "#6366f1", to: "#a855f7" },
+  { from: "#10b981", to: "#14b8a6" },
+  { from: "#f43f5e", to: "#f59e0b" },
+  { from: "#3b82f6", to: "#06b6d4" },
+];
+
+const PROJECTS = [
+  {
+    title: "Emerging Signals – A horizon scanning tool",
+    description: "News from ~30 daily RSS feeds saved in AWS, converted to embeddings using HuggingFace and saved to Qdrant, where this data is used to display analytics and relevant news to aid horizon scanning.",
+    tags: ["NLP", "Horizon Scanning", "Analytics"],
+    tech: ["AWS", "HuggingFace", "Qdrant", "React", "Cloudflare Workers"],
+    image: null,
+    route: "/emerging-signals-explorer",
+    externalUrl: null,
+  },
+  {
+    title: "Household Gas Usage Forecaster",
+    description: "Forecast your daily gas consumption up to 22 weeks using your household details. Powered by a ML model hosted on AWS trained on the IDEAL household energy dataset and weather data from the Open-Meteo API.",
+    tags: ["Forecasting", "ML", "Energy"],
+    tech: ["CatBoost", "FastAPI", "AWS Lambda", "React", "Open-Meteo"],
+    image: null,
+    route: "/gas-forecaster",
+    externalUrl: null,
+  },
+  {
+    title: "Customer Complaint Triage Tool",
+    description: "Investigating if NLP and machine learning can be used to correctly label plain-text complaints sent to financial institutions. [In progress]",
+    tags: ["NLP", "Classification"],
+    tech: ["Python"],
+    image: null,
+    route: null,
+    externalUrl: null,
+  },
+  {
+    title: "Downfall Video Game",
+    description: "A top-down 2D shoot-em-up game. [Pending upload]",
+    tags: ["Game Dev"],
+    tech: [],
+    image: null,
+    route: null,
+    externalUrl: null,
+  },
+];
+
 const Portfolio = ({ darkMode, setDarkMode }) => {
-  const EMERGING_SIGNALS_PROJECT = "Emerging Signals - A horizon scanning tool";
   const theme = getTheme(darkMode);
   const duckAudioRef = useRef(null);
+
+  const [selectedIdx, setSelectedIdx] = useState(0);
+  const touchStartX = useRef(null);
+
+  const handlePrev = () => setSelectedIdx((i) => Math.max(0, i - 1));
+  const handleNext = () => setSelectedIdx((i) => Math.min(PROJECTS.length - 1, i + 1));
+
+  const handleTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (delta < -50) handleNext();
+    else if (delta > 50) handlePrev();
+    touchStartX.current = null;
+  };
 
   const handleDuckClick = () => {
     if (!duckAudioRef.current) {
@@ -167,68 +229,43 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
     }
   ];
 
-  const projects = {
-     "Emerging Signals - A horizon scanning tool": [
-      "News from ~30 daily RSS feeds saved in AWS, converted to embeddings using HuggingFace and saved to Qdrant, where this data is used to display analytics and relevant news to aid horizon scanning.",
+
+
+  // const skills = {
+  //   "Applied Machine Learning & Analysis": [
+  //     "Production classification models",
+  //     "Transfer learning",
+  //     "NLP and HuggingFace transformers",
+  //     "Large language models",
+  //     "Computer vision prototypes",
+  //     "Azure OpenAI",
+  //     "Exploratory Data Analysis",
+  //     "Feature Engineering"
+  //   ],
+
+  //   "Data Engineering & MLOps": [
+  //     "End-to-end ML pipelines",
+  //     "SQL and large datasets",
+  //     "AWS and Azure",
+  //     "Unit testing",
+  //     "Git and refactoring",
+  //     "AWS (SageMaker, Lambda, S3, EC2, DynamoDB)",
       
-    ],
-    "Customer Complaint Triage Tool": [
-      "Investigating if NLP and machine learning can be used to correctly label plain-text complaints sent to financial institutions. [In progress]"
-    ],
+  //   ],
 
-    // "Logo Identification - Computer Vision": [
-    //   "Using computer vision to match unknown logos to ones in a reference library. [In progress]",
-      
-    // ],
+  //   "Experimentation & Analytical Thinking": [
+  //     "Large-scale experimentation",
+  //     "Hyperparameter optimisation",
+  //     "Model performance evaluation",
+  //   ],
 
-    // "Analysis and Forecasting Redunancies": [
-    //   "How well can historical and recent data industry and market data be used to predict changes in redundancy rates? [In progress]"
-    // ],
-
-    // "Sentiment Analysis in News": [
-    //   "Looking at changes in discourse in the past couple of decades. [In progress]"
-    // ],
-
-    "Downfall Video Game": [
-      "A top-down 2D shoot-em-up game. [Pending upload]"
-    ],
-  };
-
-  const skills = {
-    "Applied Machine Learning & Analysis": [
-      "Production classification models",
-      "Transfer learning",
-      "NLP and HuggingFace transformers",
-      "Large language models",
-      "Computer vision prototypes",
-      "Azure OpenAI",
-      "Exploratory Data Analysis",
-      "Feature Engineering"
-    ],
-
-    "Data Engineering & MLOps": [
-      "End-to-end ML pipelines",
-      "SQL and large datasets",
-      "AWS and Azure",
-      "Unit testing",
-      "Git and refactoring",
-      "AWS (SageMaker, Lambda, S3, EC2, DynamoDB)",
-      
-    ],
-
-    "Experimentation & Analytical Thinking": [
-      "Large-scale experimentation",
-      "Hyperparameter optimisation",
-      "Model performance evaluation",
-    ],
-
-    "Delivery, Communication & Impact": [
-      "Dashboard Creation",
-      "Horizon Scanning",
-      "Technical presentations (Audiences of 100+)",
-      "Collaboration & stakeholder engagement"
-    ]
-  };
+  //   "Delivery, Communication & Impact": [
+  //     "Dashboard Creation",
+  //     "Horizon Scanning",
+  //     "Technical presentations (Audiences of 100+)",
+  //     "Collaboration & stakeholder engagement"
+  //   ]
+  // };
 
 
   // --- RENDER ---
@@ -392,50 +429,155 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
       {/* Projects */}
       <section id="latest-projects" className={`section-anchor py-20 px-6 md:px-8 ${theme.educationSection}`}>
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
+          <div className="mb-12">
             <h2 className={`text-4xl md:text-5xl font-bold mb-4 tracking-tight ${theme.heading}`}>My latest projects</h2>
             <p className={`text-xl ${theme.bodyMuted} max-w-2xl`}>
-          Recent blogs and repositories looking into different areas of data science and machine learning.
-          </p>
+              Recent blogs and repositories looking into different areas of data science and machine learning.
+            </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {Object.entries(projects).map(([category, items], idx) => (
-              category === EMERGING_SIGNALS_PROJECT ? (
-                <Link
-                  key={idx}
-                  to="/emerging-signals-explorer"
-                  className={`project-card-clickable block p-6 ${theme.projectCard} rounded-2xl transition-all duration-300`}
+
+          {/* Desktop: featured + sidebar */}
+          <div className="flex flex-col lg:flex-row gap-6">
+
+            {/* Featured panel (60%) — swipeable on mobile */}
+            {(() => {
+              const p = PROJECTS[selectedIdx];
+              const colors = PLACEHOLDER_COLORS[selectedIdx % PLACEHOLDER_COLORS.length];
+              return (
+                <div
+                  className={`lg:flex-[3] min-w-0 p-6 md:p-8 rounded-2xl ${theme.projectCard}`}
+                  onTouchStart={handleTouchStart}
+                  onTouchEnd={handleTouchEnd}
                 >
-                  <h3 className={`text-lg font-bold mb-6 tracking-tight flex items-center gap-2 ${theme.heading}`}>
-                    {category}
-                  </h3>
-                  <div className="space-y-1">
-                    {items.map((skill, i) => (
-                      <div key={i} className={`flex items-center text-sm ${theme.body}`}>
-                        <div className={`w-1 h-1 rounded-full ${theme.dot}`}></div>
-                        {skill}
-                      </div>
-                    ))}
+                  {/* Image */}
+                  <div
+                    className="w-full aspect-video rounded-xl mb-6 flex items-center justify-center overflow-hidden"
+                    style={{ background: `linear-gradient(135deg, ${colors.from}22, ${colors.to}44)` }}
+                  >
+                    {p.image ? (
+                      <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-9xl font-black select-none" style={{ color: colors.from, opacity: 0.2 }}>
+                        {p.title.charAt(0)}
+                      </span>
+                    )}
                   </div>
-                </Link>
-              ) : (
-                <div key={idx} className={`p-6 ${theme.projectCard} rounded-2xl transition-all duration-300`}>
-                  <h3 className={`text-lg font-bold mb-6 tracking-tight flex items-center gap-2 ${theme.heading}`}>
-                    {category}
-                  </h3>
-                  <div className="space-y-1">
-                    {items.map((skill, i) => (
-                      <div key={i} className={`flex items-center text-sm ${theme.body}`}>
-                        <div className={`w-1 h-1 rounded-full ${theme.dot}`}></div>
-                        {skill}
-                      </div>
-                    ))}
-                  </div>
+
+                  {/* Title */}
+                  <h3 className={`text-2xl font-bold mb-3 tracking-tight ${theme.heading}`}>{p.title}</h3>
+
+                  {/* Tags */}
+                  {p.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {p.tags.map((tag) => (
+                        <span key={tag} className={`px-2.5 py-1 rounded-full text-xs font-semibold ${theme.skillTag}`}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Tech stack */}
+                  {p.tech.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-2 mb-4">
+                      
+                      {p.tech.map((t) => (
+                        <span key={t} className={`px-2.5 py-1 rounded-lg text-xs font-medium border ${theme.outlineButton}`}>
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Description */}
+                  <p className={`text-sm leading-relaxed mb-6 ${theme.bodyMuted}`}>{p.description}</p>
+
+                  {/* CTA */}
+                  {(p.route || p.externalUrl) && (
+                    p.route ? (
+                      <Link
+                        to={p.route}
+                        className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${theme.primaryButton}`}
+                      >
+                        View project <ArrowRight size={14} />
+                      </Link>
+                    ) : (
+                      <a
+                        href={p.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${theme.primaryButton}`}
+                      >
+                        View project <ExternalLink size={14} />
+                      </a>
+                    )
+                  )}
                 </div>
-              )
-            ))}
+              );
+            })()}
+
+            {/* Sidebar list (40%) — desktop only */}
+            <div className="hidden lg:flex lg:flex-[2] flex-col gap-2 overflow-y-auto max-h-[560px] pr-1">
+              {PROJECTS.map((p, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedIdx(i)}
+                  className={`w-full text-left p-4 rounded-xl transition-all border-l-2 ${
+                    selectedIdx === i
+                      ? `${theme.projectCard} border-l-current`
+                      : `${theme.projectCard} border-l-transparent opacity-50 hover:opacity-80`
+                  }`}
+                >
+                  <div className={`text-sm font-bold mb-2 leading-snug ${theme.heading}`}>{p.title}</div>
+                  <div className="flex flex-wrap gap-1">
+                    {p.tags.map((tag) => (
+                      <span key={tag} className={`text-xs px-2 py-0.5 rounded-full ${theme.skillTag}`}>{tag}</span>
+                    ))}
+                  </div>
+                </button>
+              ))}
+            </div>
+
           </div>
+
+          {/* Mobile carousel controls: arrows + dots */}
+          <div className="flex items-center justify-between mt-5 lg:hidden">
+            <button
+              onClick={handlePrev}
+              disabled={selectedIdx === 0}
+              className={`p-2 rounded-full transition-all ${theme.outlineButton} disabled:opacity-20`}
+              aria-label="Previous project"
+            >
+              <ChevronLeft size={20} />
+            </button>
+
+            <div className="flex items-center gap-2">
+              {PROJECTS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedIdx(i)}
+                  aria-label={`Go to project ${i + 1}`}
+                  className="transition-all rounded-full"
+                  style={{
+                    width: i === selectedIdx ? "1.5rem" : "0.5rem",
+                    height: "0.5rem",
+                    opacity: i === selectedIdx ? 0.8 : 0.25,
+                    background: "currentColor",
+                  }}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={handleNext}
+              disabled={selectedIdx === PROJECTS.length - 1}
+              className={`p-2 rounded-full transition-all ${theme.outlineButton} disabled:opacity-20`}
+              aria-label="Next project"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+
         </div>
         <div className="max-w-7xl mx-auto mt-20 md:mt-24">
           <h2 className={`text-3xl font-bold mb-12 tracking-tight ${theme.heading}`}>All Projects</h2>
@@ -601,7 +743,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
         </div>
       </section>
 
-      {/* Skills */}
+      {/* Skills
       <section id="skill-toolkit" className={`section-anchor py-24 px-6 md:px-8 ${theme.sectionSoftBg}`}>
         <div className="max-w-7xl mx-auto">
           <div className="mb-16">
@@ -630,7 +772,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA */}
       <section className={`py-32 px-6 md:px-8 ${theme.ctaSection}`}>
