@@ -267,7 +267,6 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
   };
 
   const ensembleBoundary    = toChartDate(result?.ensemble_cutoff);
-  const subseasonalBoundary = toChartDate(result?.subseasonal_cutoff);
 
   // Only meaningful if the cutoff falls strictly before the last forecast day.
   const singleBoundary =

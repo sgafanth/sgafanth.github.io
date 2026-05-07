@@ -7,7 +7,7 @@ import GasForecaster from "./pages/Gas-forecaster";
 import { getTheme } from "./theme";
 import "./App.css";
 
-const HOME_SECTION_IDS = ["latest-projects", "professional-experience", "education", "skill-toolkit"];
+const HOME_SECTION_IDS = ["latest-projects", "professional-experience", "education"];
 const NO_SECTION_IDS = [];
 
 function Layout({ darkMode, setDarkMode }) {
@@ -159,13 +159,6 @@ function Layout({ darkMode, setDarkMode }) {
                 >
                   Education
                 </a>
-                <a
-                  href="#skill-toolkit"
-                  onClick={() => handleSectionClick("skill-toolkit")}
-                  className={getSectionLinkClass("skill-toolkit")}
-                >
-                  Skills
-                </a>
               </div>
             )}
             {!isHomePage && (
@@ -273,13 +266,6 @@ function Layout({ darkMode, setDarkMode }) {
                   className={getSectionLinkClass("education")}
                 >
                   Education
-                </a>
-                <a
-                  href="#skill-toolkit"
-                  onClick={() => handleSectionClick("skill-toolkit")}
-                  className={getSectionLinkClass("skill-toolkit")}
-                >
-                  Skills
                 </a>
               </div>
             )}
