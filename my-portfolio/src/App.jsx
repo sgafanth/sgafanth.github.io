@@ -361,6 +361,12 @@ function RoutedLayout(props) {
   return <Layout key={pathname} {...props} />;
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   
@@ -370,6 +376,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <RoutedLayout darkMode={darkMode} setDarkMode={setDarkMode} />
     </BrowserRouter>
   );

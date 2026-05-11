@@ -31,7 +31,7 @@ const PROJECTS = [
     description: "News from ~30 daily RSS feeds saved in AWS, converted to embeddings using HuggingFace and saved to Qdrant, where this data is used to display analytics and relevant news to aid horizon scanning.",
     tags: ["NLP", "Horizon Scanning", "Analytics"],
     tech: ["AWS", "HuggingFace", "Qdrant", "React", "Cloudflare Workers"],
-    image: null,
+    image: "images/Horizon-scanner.png",
     route: "/emerging-signals-explorer",
     externalUrl: null,
   },
@@ -40,7 +40,7 @@ const PROJECTS = [
     description: "Forecast your daily gas consumption up to 22 weeks using your household details. Powered by a ML model hosted on AWS trained on the IDEAL household energy dataset and weather data from the Open-Meteo API.",
     tags: ["Forecasting", "ML", "Energy"],
     tech: ["CatBoost", "FastAPI", "AWS Lambda", "React", "Open-Meteo"],
-    image: null,
+    image: "images/gas-forecast.png",
     route: "/gas-forecaster",
     externalUrl: null,
   },
@@ -58,7 +58,7 @@ const PROJECTS = [
     description: "A top-down 2D shoot-em-up game. [Pending upload]",
     tags: ["Game Dev"],
     tech: [],
-    image: null,
+    image: "images/downfall.png",
     route: null,
     externalUrl: null,
   },
@@ -128,9 +128,9 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
       companyUrl: "https://www.zally.com/",
       logoUrl: "images/zally_square.png",
       period: "2024 - 2025",
-      summary: "Combined applied research with rapid experimentation to deliver 100+ user models to production with >90% accuracy.",
+      summary: "Combined applied research with rapid experimentation to deliver 100+ user models to production with >90% F1.",
       achievements: [
-        "**Increased model accuracy:** Improved ML model accuracy from 60% to over 90% by running 200+ experiments on datasets containing 450,000+ rows per user across 100+ users.",
+        "**Increased model performance:** Improved ML model F1 from 60% to over 90% by running 200+ experiments on datasets containing 450,000+ rows per user across 100+ users.",
         "**Automated bad data filtering:** Built an end-to-end pipeline to label and filter irrelevant data representing 60% of all user data by utilising Python, CatBoost, and AWS S3.",
         "**KPI dashboard:** Built and deployed an interactive dashboard on AWS EC2 to present KPIs and data insights to technical and non-technical stakeholders.",
         "**Code quality and reliability:** Documented and formatted 54 modules to PEP8 standards and maintained unit tests with a minimum of 80% code coverage.",
@@ -410,7 +410,7 @@ const Portfolio = ({ darkMode, setDarkMode }) => {
               <div className={`text-sm tracking-wide font-semibold ${theme.bodySubtle}`}>Increase in model performance</div>
             </div>
             <div className="text-center md:text-left">
-              <div className={`text-2xl lg:text-3xl font-bold mb-1 ${theme.heading}`}>3 Years</div>
+              <div className={`text-2xl lg:text-3xl font-bold mb-1 ${theme.heading}`}>2 Years</div>
               <div className={`text-sm tracking-wide font-semibold ${theme.bodySubtle}`}>Industry experience</div>
             </div>
             <div className="text-center md:text-left">
