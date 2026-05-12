@@ -107,7 +107,7 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
   const [result, setResult] = useState(null);
   const [selectedOverlay, setSelectedOverlay] = useState(null);
   const [granularity, setGranularity] = useState("daily");   // "daily" | "weekly"
-  const [chartType, setChartType] = useState("bar");          // "bar" | "line"
+  const [chartType, setChartType] = useState("line");          // "bar" | "line"
   const [formErrors, setFormErrors] = useState({});
   const [postcode, setPostcode] = useState("");
   const [postcodeLoading, setPostcodeLoading] = useState(false);
@@ -192,15 +192,20 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
           ? "seasonal"
           : "subseasonal";
     }
+    const q10 = parseFloat((d.gas_wh_q10 / 1000).toFixed(3));
+    const q90 = parseFloat((d.gas_wh_q90 / 1000).toFixed(3));
     return {
-      isoDate:    d.date,
-      date:       new Date(d.date).toLocaleDateString("en-GB", { day: "numeric", month: "short" }),
-      gas_kwh:    parseFloat((d.gas_wh / 1000).toFixed(3)),
-      temp:       d.temp,
-      temp_band:  [d.temp_min, d.temp_max],
-      wind_speed: d.wind_speed,
-      solar_rad:  d.solar_rad,
-      humidity:   d.humidity,
+      isoDate:      d.date,
+      date:         new Date(d.date).toLocaleDateString("en-GB", { day: "numeric", month: "short" }),
+      gas_kwh_q10:  q10,
+      gas_kwh_q50:  parseFloat((d.gas_wh_q50 / 1000).toFixed(3)),
+      gas_kwh_q90:  q90,
+      gas_band:     [q10, q90],
+      temp:         d.temp,
+      temp_band:    [d.temp_min, d.temp_max],
+      wind_speed:   d.wind_speed,
+      solar_rad:    d.solar_rad,
+      humidity:     d.humidity,
     };
   }) ?? null;
 
@@ -244,10 +249,10 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
     )];
   })();
 
-  // Y-axis: ticks every 5 kWh up to the nearest 5 above the max.
+  // Y-axis: ticks every 5 kWh up to the nearest 5 above the q90 max.
   const yTicks = (() => {
     if (!chartData) return [];
-    const maxGas = Math.max(...chartData.map((d) => d.gas_kwh));
+    const maxGas = Math.max(...chartData.map((d) => d.gas_kwh_q90));
     const ceil5 = Math.ceil(maxGas / 5) * 5;
     return Array.from({ length: Math.floor(ceil5 / 5) + 1 }, (_, i) => i * 5);
   })();
@@ -302,15 +307,16 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
   };
 
   const tooltipFormatter = (value, name) => {
-    const gasLabel = granularity === "weekly" ? "Gas (week)" : "Gas";
+    const suffix = granularity === "weekly" ? " (week)" : "";
     switch (name) {
-      case "gas_kwh":    return [`${value} kWh`, gasLabel];
-      case "temp":       return [`${value}°C`, "Mean temp"];
-      case "temp_band":  return [`${value[0]}°C – ${value[1]}°C`, "Daily range"];
-      case "wind_speed": return [`${value} m/s`, "Wind speed"];
-      case "solar_rad":  return [`${value} W/m²`, "Solar radiation"];
-      case "humidity":   return [`${value}%`, "Humidity"];
-      default:           return [value, name];
+      case "gas_kwh_q50": return [`${value} kWh`, `Gas median${suffix}`];
+      case "gas_band":    return [`${value[0]} – ${value[1]} kWh`, `80% interval${suffix}`];
+      case "temp":        return [`${value}°C`, "Mean temp"];
+      case "temp_band":   return [`${value[0]}°C – ${value[1]}°C`, "Daily range"];
+      case "wind_speed":  return [`${value} m/s`, "Wind speed"];
+      case "solar_rad":   return [`${value} W/m²`, "Solar radiation"];
+      case "humidity":    return [`${value}%`, "Humidity"];
+      default:            return [value, name];
     }
   };
 
@@ -724,21 +730,33 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
                 {chartType === "bar" ? (
                   <Bar
                     yAxisId="gas"
-                    dataKey="gas_kwh"
+                    dataKey="gas_kwh_q50"
                     fill="rgba(99,102,241,0.55)"
                     radius={[2, 2, 0, 0]}
                     maxBarSize={granularity === "weekly" ? 28 : 14}
                   />
                 ) : (
-                  <Line
-                    yAxisId="gas"
-                    type="monotone"
-                    dataKey="gas_kwh"
-                    stroke="rgba(99,102,241,0.8)"
-                    strokeWidth={2}
-                    dot={false}
-                    activeDot={{ r: 4 }}
-                  />
+                  <>
+                    <Area
+                      yAxisId="gas"
+                      type="monotone"
+                      dataKey="gas_band"
+                      fill="rgba(99,102,241,0.12)"
+                      stroke="none"
+                      dot={false}
+                      activeDot={false}
+                      legendType="none"
+                    />
+                    <Line
+                      yAxisId="gas"
+                      type="monotone"
+                      dataKey="gas_kwh_q50"
+                      stroke="rgba(99,102,241,0.9)"
+                      strokeWidth={2}
+                      dot={false}
+                      activeDot={{ r: 4 }}
+                    />
+                  </>
                 )}
 
                 {activeOverlay?.hasBand && (
