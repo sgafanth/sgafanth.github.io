@@ -805,6 +805,7 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
 
             <p className={`text-xs mt-4 ${theme.bodySubtle}`}>
               Gas usage on the left axis. Select a weather overlay to display on the right axis.
+              Gas usage shows a median forecast line with a shaded 80% confidence interval based on the model's uncertainty.
               For temperature, the shaded band shows the daily high/low range.
               Dashed lines mark weather model boundaries - confidence decreases further into the future.
               Weekly view shows summed gas and averaged weather per 7-day period.
