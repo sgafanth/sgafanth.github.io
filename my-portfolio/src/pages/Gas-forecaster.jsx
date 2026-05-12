@@ -78,24 +78,6 @@ const validateField = (key, value) => {
   return null;
 };
 
-// Aggregate a chunk of daily rows into a single weekly row.
-const aggregateWeek = (days) => {
-  const avg = (key) =>
-    parseFloat((days.reduce((s, d) => s + d[key], 0) / days.length).toFixed(1));
-  return {
-    isoDate:    days[0].isoDate,
-    date:       days[0].date,
-    gas_kwh:    parseFloat(days.reduce((s, d) => s + d.gas_kwh, 0).toFixed(2)),
-    temp:       avg("temp"),
-    temp_band:  [
-      Math.min(...days.map((d) => d.temp_band[0])),
-      Math.max(...days.map((d) => d.temp_band[1])),
-    ],
-    wind_speed: avg("wind_speed"),
-    solar_rad:  avg("solar_rad"),
-    humidity:   avg("humidity"),
-  };
-};
 
 const GasForecaster = ({ darkMode, setDarkMode }) => {
   const theme = getTheme(darkMode);
@@ -106,7 +88,6 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
   const [error, setError] = useState(null);
   const [result, setResult] = useState(null);
   const [selectedOverlay, setSelectedOverlay] = useState(null);
-  const [granularity, setGranularity] = useState("daily");   // "daily" | "weekly"
   const [chartType, setChartType] = useState("line");          // "bar" | "line"
   const [formErrors, setFormErrors] = useState({});
   const [postcode, setPostcode] = useState("");
@@ -209,45 +190,14 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
     };
   }) ?? null;
 
-  const weeklyChartData = (() => {
-    if (!dailyChartData) return null;
 
-    const weeks = [];
-
-    for (let i = 0; i + 6 < dailyChartData.length; i += 7) {
-        weeks.push(
-        aggregateWeek(dailyChartData.slice(i, i + 7))
-        );
-    }
-
-    return weeks;
-    })();
-
-  const chartData = granularity === "weekly" ? weeklyChartData : dailyChartData;
+  const chartData = dailyChartData;
 
   // X-axis: tick on the 1st of each month. For weekly, find the week whose
   // start date falls closest to the 1st (must be an exact data key).
-  const monthStartTicks = (() => {
-    if (!chartData) return [];
-    if (granularity === "daily") {
-      return chartData
-        .filter((d) => new Date(d.isoDate).getDate() === 1)
-        .map((d) => d.date);
-    }
-    // Weekly: for each calendar month present, pick the week-start closest to the 1st.
-    const monthsPresent = [...new Set(chartData.map((d) => d.isoDate.slice(0, 7)))];
-    return [...new Set(
-      monthsPresent.map((ym) => {
-        const target = new Date(`${ym}-01`).getTime();
-        return chartData.reduce((best, d) =>
-          Math.abs(new Date(d.isoDate) - target) <
-          Math.abs(new Date(best.isoDate) - target)
-            ? d
-            : best
-        ).date;
-      })
-    )];
-  })();
+  const monthStartTicks = chartData
+    ? chartData.filter((d) => new Date(d.isoDate).getDate() === 1).map((d) => d.date)
+    : [];
 
   // Y-axis: ticks every 5 kWh up to the nearest 5 above the q90 max.
   const yTicks = (() => {
@@ -260,15 +210,7 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
   // Map an ISO cutoff date to the nearest formatted date string in chartData.
   const toChartDate = (isoDate) => {
     if (!isoDate || !chartData) return null;
-    if (granularity === "daily") {
-      return chartData.find((d) => d.isoDate === isoDate)?.date ?? null;
-    }
-    for (let i = 0; i < chartData.length - 1; i++) {
-      if (chartData[i].isoDate <= isoDate && isoDate < chartData[i + 1].isoDate) {
-        return chartData[i].date;
-      }
-    }
-    return chartData[chartData.length - 1].date;
+    return chartData.find((d) => d.isoDate === isoDate)?.date ?? null;
   };
 
   const ensembleBoundary    = toChartDate(result?.ensemble_cutoff);
@@ -307,10 +249,9 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
   };
 
   const tooltipFormatter = (value, name) => {
-    const suffix = granularity === "weekly" ? " (week)" : "";
     switch (name) {
-      case "gas_kwh_q50": return [`${value} kWh`, `Gas median${suffix}`];
-      case "gas_band":    return [`${value[0]} – ${value[1]} kWh`, `80% interval${suffix}`];
+      case "gas_kwh_q50": return [`${value} kWh`, "Gas median"];
+      case "gas_band":    return [`${value[0]} – ${value[1]} kWh`, "80% interval"];
       case "temp":        return [`${value}°C`, "Mean temp"];
       case "temp_band":   return [`${value[0]}°C – ${value[1]}°C`, "Daily range"];
       case "wind_speed":  return [`${value} m/s`, "Wind speed"];
@@ -648,10 +589,6 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
             {/* Chart controls */}
             <div className="flex flex-wrap gap-6 mb-6 items-center">
               <div className="flex gap-2">
-                <button onClick={() => setGranularity("daily")}  className={pillBtn(granularity === "daily")}>Daily</button>
-                <button onClick={() => setGranularity("weekly")} className={pillBtn(granularity === "weekly")}>Weekly</button>
-              </div>
-              <div className="flex gap-2">
                 <button onClick={() => setChartType("bar")}  className={pillBtn(chartType === "bar")}>Bar</button>
                 <button onClick={() => setChartType("line")} className={pillBtn(chartType === "line")}>Line</button>
               </div>
@@ -733,7 +670,7 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
                     dataKey="gas_kwh_q50"
                     fill="rgba(99,102,241,0.55)"
                     radius={[2, 2, 0, 0]}
-                    maxBarSize={granularity === "weekly" ? 28 : 14}
+                    maxBarSize={14}
                   />
                 ) : (
                   <>
@@ -742,7 +679,8 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
                       type="monotone"
                       dataKey="gas_band"
                       fill="rgba(99,102,241,0.12)"
-                      stroke="none"
+                      stroke="rgba(99,102,241,0.7)"
+                      strokeWidth={0}
                       dot={false}
                       activeDot={false}
                       legendType="none"
@@ -765,11 +703,12 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
                     type="monotone"
                     dataKey="temp_band"
                     fill={`${activeOverlay.color}28`}
-                    stroke="none"
+                    stroke={`${activeOverlay.color}99`}
+                    strokeWidth={0}
                     dot={false}
                     activeDot={false}
                     legendType="none"
-                  />
+                    />
                 )}
 
                 {activeOverlay && (
@@ -808,7 +747,6 @@ const GasForecaster = ({ darkMode, setDarkMode }) => {
               Gas usage shows a median forecast line with a shaded 80% confidence interval based on the model's uncertainty.
               For temperature, the shaded band shows the daily high/low range.
               Dashed lines mark weather model boundaries - confidence decreases further into the future.
-              Weekly view shows summed gas and averaged weather per 7-day period.
             </p>
             <p className={`text-xs mt-2 ${theme.bodySubtle}`}>
               Weather data by{" "}

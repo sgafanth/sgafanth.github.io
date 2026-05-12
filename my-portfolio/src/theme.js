@@ -89,7 +89,7 @@ const lightTheme = {
   dot: "bg-[#71A366]",
   ctaSection: "bg-[#2E402A] text-[#F3F3F3]",
   ctaBody: "text-[#BAC8B1]",
-  footer: "bg-[#BAC8B1]",
+  footer: "bg-[#232020]",
   footerText: "text-[#cbd1e3]",
   educationSection: "bg-[#BAC8B1]",
   educationCard: "bg-[#F3F3F3] shadow-sm",
